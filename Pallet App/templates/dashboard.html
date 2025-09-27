@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pallet Scanning Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+<body>
+<div class="container">
+    <h1>Pallet Scanning Dashboard</h1>
+
+    <div class="scan-box">
+        <input type="text" id="palletNo" placeholder="Scan Pallet QR Code" autofocus>
+        <a href="{{ url_for('download_report') }}" class="btn">Download Report</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Pallet No</th>
+                <th>Out Time</th>
+                <th>In Time</th>
+            </tr>
+        </thead>
+        <tbody id="palletTable">
+            {% for p in pallets %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{ p.pallet_no }}</td>
+                <td>{{ p.out_time }}</td>
+                <td>{{ p.in_time or "" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
